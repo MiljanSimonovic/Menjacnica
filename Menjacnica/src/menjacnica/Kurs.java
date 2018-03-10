@@ -10,18 +10,24 @@ public class Kurs {
 		return vrsta;
 	}
 	public void setVrsta(String vrsta) {
+		if(vrsta==null)
+			throw new RuntimeException("Vrsta je null");
 		this.vrsta = vrsta;
 	}
 	public GregorianCalendar getDatum() {
 		return datum;
 	}
 	public void setDatum(GregorianCalendar datum) {
+		if(datum==null)
+			throw new RuntimeException("Datum je null");
 		this.datum = datum;
 	}
 	public double getVrednost() {
 		return vrednost;
 	}
 	public void setVrednost(double vrednost) {
+		if(vrednost<=0)
+			throw new RuntimeException("Vrednost je manja od nule");
 		this.vrednost = vrednost;
 	}
 	@Override
