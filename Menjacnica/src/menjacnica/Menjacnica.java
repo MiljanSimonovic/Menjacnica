@@ -60,5 +60,4 @@ private LinkedList<Valuta> valute=new LinkedList<Valuta>();
 		}
 		throw new RuntimeException("Ne postoji kurs za taj dan");
 	}
-
 }

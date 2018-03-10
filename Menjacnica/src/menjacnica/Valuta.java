@@ -57,7 +57,6 @@ public class Valuta {
 	}
 	@Override
 	public String toString() {
-		return "Valuta [naziv=" + naziv + ", skraceni naziv=" + skraceniNaziv + "]";
+		return "Valuta: naziv=" + naziv + ", skraceni naziv=" + skraceniNaziv;
 	}
-	
 }
