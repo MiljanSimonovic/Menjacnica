@@ -7,7 +7,7 @@ import menjacnica.interfejs.MenjacnicaInterfejs;
 
 public class Menjacnica implements MenjacnicaInterfejs {
 
-	LinkedList<Valuta> valute=new LinkedList<Valuta>();
+private LinkedList<Valuta> valute=new LinkedList<Valuta>();
 	
 	@Override
 	public void dodajKurs(String nazivValute, String vrsta, GregorianCalendar datum, double vrednost) {
@@ -18,10 +18,8 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		k.setDatum(datum);
 		k.setVrednost(vrednost);
 		
-		if(valute.contains(v)) {
-			System.out.println("Uneta valuta vec postoji");
-			return;
-		}
+		if(valute.contains(v))
+			throw new RuntimeException("Uneta valuta vec postoji");
 		for (int i = 0; i < valute.size(); i++) {
 			if(valute.get(i)==null) {
 				valute.get(i).getKursevi().add(k);
@@ -38,10 +36,8 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		k.setVrsta(vrsta);
 		k.setDatum(datum);
 		
-		if(!valute.contains(v)) {
-			System.out.println("Uneta valuta ne postoji");
-			return;
-		}
+		if(!valute.contains(v))
+			throw new RuntimeException("Uneta valuta ne postoji");
 		for (int i = 0; i < valute.size(); i++) {
 			if(valute.get(i).getKursevi().contains(k))
 				valute.get(i).getKursevi().remove(k);
@@ -56,10 +52,8 @@ public class Menjacnica implements MenjacnicaInterfejs {
 		k.setVrsta(vrsta);
 		k.setDatum(datum);
 
-		if(!valute.contains(v)) {
-			System.out.println("Ne postoji data valuta");
-			return;
-		}
+		if(!valute.contains(v))
+			throw new RuntimeException("Ne postoji data valuta");
 		for (int i = 0; i < valute.size(); i++) {
 			if(valute.get(i).getKursevi().contains(k))
 				return k;
