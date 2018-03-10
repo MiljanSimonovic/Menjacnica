@@ -1,27 +1,70 @@
 package menjacnica;
 
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 import menjacnica.interfejs.MenjacnicaInterfejs;
 
 public class Menjacnica implements MenjacnicaInterfejs {
 
+	LinkedList<Valuta> valute=new LinkedList<Valuta>();
+	
 	@Override
 	public void dodajKurs(String nazivValute, String vrsta, GregorianCalendar datum, double vrednost) {
-		// TODO Auto-generated method stub
-
+		Valuta v=new Valuta();
+		v.setNaziv(nazivValute);
+		Kurs k=new Kurs();
+		k.setVrsta(vrsta);
+		k.setDatum(datum);
+		k.setVrednost(vrednost);
+		
+		if(valute.contains(v)) {
+			System.out.println("Uneta valuta vec postoji");
+			return;
+		}
+		for (int i = 0; i < valute.size(); i++) {
+			if(valute.get(i)==null) {
+				valute.get(i).getKursevi().add(k);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void izbrisiKurs(String nazivValute, String vrsta, GregorianCalendar datum) {
-		// TODO Auto-generated method stub
-
+		Valuta v=new Valuta();
+		v.setNaziv(nazivValute);
+		Kurs k=new Kurs();
+		k.setVrsta(vrsta);
+		k.setDatum(datum);
+		
+		if(!valute.contains(v)) {
+			System.out.println("Uneta valuta ne postoji");
+			return;
+		}
+		for (int i = 0; i < valute.size(); i++) {
+			if(valute.get(i).getKursevi().contains(k))
+				valute.get(i).getKursevi().remove(k);
+		}
 	}
 
 	@Override
 	public Kurs vratiKurs(String nazivValute, String vrsta, GregorianCalendar datum) {
-		// TODO Auto-generated method stub
-		return null;
+		Valuta v=new Valuta();
+		v.setNaziv(nazivValute);
+		Kurs k=new Kurs();
+		k.setVrsta(vrsta);
+		k.setDatum(datum);
+
+		if(!valute.contains(v)) {
+			System.out.println("Ne postoji data valuta");
+			return;
+		}
+		for (int i = 0; i < valute.size(); i++) {
+			if(valute.get(i).getKursevi().contains(k))
+				return k;
+		}
+		throw new RuntimeException("Ne postoji kurs za taj dan");
 	}
 
 }
